@@ -16,7 +16,7 @@ Cloudflare Workers 1 つと D1 1 つで動く（[ADR 0003](adr/0003-cloudflare-w
 |---|---|
 | `src/index.tsx` | ルーティング・セキュリティヘッダー・ページ表示の記録・イベント API |
 | `src/pages.tsx` | 全画面の HTML（Hono JSX）と OGP の meta |
-| `src/content/types.ts` | 8 タイプの定義（名前・文言・色・相性） |
+| `src/content/types.ts` | 16 タイプの定義（名前・文言・色・相性） |
 | `src/content/questions.ts` | 質問と、選択肢がどの軸のどちらに効くか |
 | `src/lib/score.ts` | 回答 → タイプの判定。ブラウザにも同じものを配る |
 | `src/lib/access-log.ts` | D1 への書き込み・端末/bot の判定・訪問者のハッシュ |
@@ -46,13 +46,16 @@ Cloudflare Workers 1 つと D1 1 つで動く（[ADR 0003](adr/0003-cloudflare-w
 
 ## 診断の判定
 
-3 つの軸に 3 問ずつ。各軸で多かった側の文字をつなげたものがタイプのコード（例: `AHD`）。
+4 つの軸に 3 問ずつ（計 12 問）。各軸で多かった側の文字をつなげたものがタイプのコード（例: `AHDV`）。軸の根拠は [ADR 0008](adr/0008-sixteen-types-with-expression-axis.md)。
 
 | 軸 | 文字 |
 |---|---|
 | approach（動き方） | A = 自分から動く / P = 様子を見る |
 | temperature（恋の温度） | H = 燃え上がる / C = じっくり温める |
 | distance（距離感） | D = いつも一緒 / I = ひとりの時間も大事 |
+| expression（伝え方） | V = 言葉で伝える / B = 行動で示す |
+
+相性のいい相手は「動き方と温度が逆、距離感と伝え方が同じ」タイプ（例: `AHDV` ↔ `PCDV`）。
 
 ## セキュリティ
 
