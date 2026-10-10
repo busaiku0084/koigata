@@ -27,6 +27,10 @@ function Layout(props: { meta: Meta; accent?: string; children: Child }) {
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta name="twitter:card" content="summary_large_image" />
+        <link rel="icon" href="/favicon.ico" sizes="32x32" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <meta name="theme-color" content="#e0559b" />
         <link rel="stylesheet" href="/assets/style.css" />
         <script type="module" src="/assets/app.js" />
       </head>

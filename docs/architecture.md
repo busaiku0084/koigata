@@ -22,7 +22,7 @@ Cloudflare Workers 1 つと D1 1 つで動く（[ADR 0003](adr/0003-cloudflare-w
 | `src/lib/access-log.ts` | D1 への書き込み・端末/bot の判定・訪問者のハッシュ |
 | `client/app.ts` | ブラウザ側。診断の進行・シェアボタン・イベント送信。`pnpm build:client` で `public/assets/app.js` に |
 | `public/assets/style.css` | 全画面の CSS |
-| `public/og/`・`public/story/` | シェア用画像（`scripts/gen-images.ts` で生成してコミット） |
+| `public/og/`・`public/story/`・`public/favicon.*`・`public/apple-touch-icon.png` | シェア用画像とファビコン（`scripts/gen-images.ts` で生成してコミット） |
 | `migrations/` | D1 のスキーマ |
 | `scripts/stats.ts` | アクセスログの集計 |
 
