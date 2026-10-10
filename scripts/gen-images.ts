@@ -88,14 +88,17 @@ function storySvg(type: LoveType): string {
 function topSvg(): string {
   const colors = ALL_TYPES.map((t) => t.color);
   const dots = colors
-    .map((c, i) => `<circle cx="${270 + i * 94}" cy="470" r="30" fill="${c}"/>`)
+    .map(
+      (c, i) =>
+        `<circle cx="${270 + (i % 8) * 94}" cy="${440 + Math.floor(i / 8) * 60}" r="24" fill="${c}"/>`,
+    )
     .join("");
   return `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
   <rect width="1200" height="630" fill="#fff8f6"/>
   ${textLines(["1 分でわかる、あなたの恋愛タイプ"], { x: 600, y: 180, size: 44, lineHeight: 0, fill: "#7a6f7d" })}
-  ${textLines([SITE_NAME], { x: 600, y: 330, size: 140, lineHeight: 0, fill: "#e0559b" })}
+  ${textLines([SITE_NAME], { x: 600, y: 320, size: 140, lineHeight: 0, fill: "#e0559b" })}
   ${dots}
-  ${textLines([`登録不要・${QUESTIONS.length} 問・全 8 タイプ`], { x: 600, y: 570, size: 36, lineHeight: 0, fill: "#2b2230" })}
+  ${textLines([`登録不要・${QUESTIONS.length} 問・全 ${ALL_TYPES.length} タイプ`], { x: 600, y: 590, size: 32, lineHeight: 0, fill: "#2b2230" })}
 </svg>`;
 }
 

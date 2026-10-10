@@ -3,7 +3,7 @@ import { QUESTIONS } from "./content/questions.ts";
 import { ALL_TYPES, LOVE_TYPES, type LoveType } from "./content/types.ts";
 
 export const SITE_NAME = "恋型診断";
-const SITE_DESCRIPTION = "9 つの質問でわかる、あなたの恋愛タイプ。登録不要・1 分で診断できます。";
+const SITE_DESCRIPTION = `${QUESTIONS.length} の質問でわかる、${ALL_TYPES.length} タイプの恋愛診断。登録不要・1 分で診断できます。`;
 const HASHTAG = "恋型診断";
 
 type Meta = { title: string; description: string; url: string; image: string };
@@ -59,7 +59,7 @@ export function TopPage(props: { origin: string }) {
       <section class="hero">
         <p class="eyebrow">登録不要・{QUESTIONS.length} 問・1 分</p>
         <h1>{SITE_NAME}</h1>
-        <p class="lead">あなたは 8 つの恋愛タイプのうち、どれ？</p>
+        <p class="lead">あなたは {ALL_TYPES.length} の恋愛タイプのうち、どれ？</p>
         <a class="button" href="/quiz" data-event="quiz_start">
           診断をはじめる
         </a>
@@ -205,7 +205,7 @@ export function TypesPage(props: { origin: string }) {
     <Layout
       meta={{
         title: `全タイプ一覧｜${SITE_NAME}`,
-        description: `${SITE_NAME}の 8 つの恋愛タイプの一覧です。`,
+        description: `${SITE_NAME}の ${ALL_TYPES.length} の恋愛タイプの一覧です。`,
         url: `${props.origin}/types`,
         image: `${props.origin}/og/top.png`,
       }}

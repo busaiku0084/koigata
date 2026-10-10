@@ -1,6 +1,7 @@
 import type { Axis, Pole } from "./types.ts";
 
 // 2 択の質問。1 つの軸につき 3 問（奇数）なので、軸ごとの結果は必ずどちらかに決まる
+// 軸が順に回るように並べる（approach → temperature → distance → expression）
 export type Question = {
   id: string;
   axis: Axis;
@@ -38,6 +39,15 @@ export const QUESTIONS: Question[] = [
   },
   {
     id: "q4",
+    axis: "expression",
+    text: "好きな気持ちを伝えるなら？",
+    choices: [
+      { label: "「好き」とはっきり言葉にする", pole: "V" },
+      { label: "態度や行動でわかってもらう", pole: "B" },
+    ],
+  },
+  {
+    id: "q5",
     axis: "approach",
     text: "初デートの行き先は？",
     choices: [
@@ -46,7 +56,7 @@ export const QUESTIONS: Question[] = [
     ],
   },
   {
-    id: "q5",
+    id: "q6",
     axis: "temperature",
     text: "ケンカしたときは？",
     choices: [
@@ -55,7 +65,7 @@ export const QUESTIONS: Question[] = [
     ],
   },
   {
-    id: "q6",
+    id: "q7",
     axis: "distance",
     text: "休日の過ごし方は？",
     choices: [
@@ -64,7 +74,16 @@ export const QUESTIONS: Question[] = [
     ],
   },
   {
-    id: "q7",
+    id: "q8",
+    axis: "expression",
+    text: "恋人が落ち込んでいたら？",
+    choices: [
+      { label: "話を聞いて、励ましの言葉をかける", pole: "V" },
+      { label: "好きな食べ物を持って会いに行く", pole: "B" },
+    ],
+  },
+  {
+    id: "q9",
     axis: "approach",
     text: "告白するなら？",
     choices: [
@@ -73,7 +92,7 @@ export const QUESTIONS: Question[] = [
     ],
   },
   {
-    id: "q8",
+    id: "q10",
     axis: "temperature",
     text: "記念日のお祝いは？",
     choices: [
@@ -82,12 +101,21 @@ export const QUESTIONS: Question[] = [
     ],
   },
   {
-    id: "q9",
+    id: "q11",
     axis: "distance",
     text: "恋人が友達と旅行に行くと言ったら？",
     choices: [
       { label: "ちょっとさみしい", pole: "D" },
       { label: "楽しんできてね！", pole: "I" },
+    ],
+  },
+  {
+    id: "q12",
+    axis: "expression",
+    text: "恋人にしてもらってうれしいのは？",
+    choices: [
+      { label: "「大好きだよ」のひとこと", pole: "V" },
+      { label: "何も言わずにぎゅっとされる", pole: "B" },
     ],
   },
 ];
