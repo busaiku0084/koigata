@@ -5,8 +5,13 @@
 初回のデプロイから、すべてのページ表示と操作を D1 にアクセスログとして残す。
 
 - 企画とマネタイズの段取り: [docs/plan.md](docs/plan.md)
+- 構成: [docs/architecture.md](docs/architecture.md)
 - アクセスログの設計と集計: [docs/access-log.md](docs/access-log.md)
-- 初回デプロイの手順: [docs/deploy.md](docs/deploy.md)
+- デプロイと運用: [docs/operations.md](docs/operations.md)
+- 開発の進め方・コーディングルール: [docs/development/](docs/README.md)
+- 設計判断の記録: [docs/adr/](docs/adr/README.md)
+
+Claude Code で作業するときの決まりは [CLAUDE.md](CLAUDE.md)、スキルは `.claude/skills/`（quality-gate・edit-content・new-adr）。
 
 ## 構成
 

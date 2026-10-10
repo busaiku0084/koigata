@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm check)",
+      "Bash(pnpm check:fix)",
+      "Bash(pnpm type-check)",
+      "Bash(pnpm test)",
+      "Bash(pnpm install)",
+      "Bash(pnpm build:client)",
+      "Bash(pnpm gen:images)",
+      "Bash(pnpm db:migrate:local)",
+      "Bash(pnpm stats --local)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)"
+    ],
+    "deny": ["Read(./.dev.vars)", "Read(./.env)", "Read(./.env.*)"]
+  }
+}
