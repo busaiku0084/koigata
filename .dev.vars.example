@@ -1,0 +1,3 @@
+# ローカル開発用。.dev.vars にコピーして使う（コミットしない）
+# 訪問者 ID のハッシュに混ぜる値。本番は `wrangler secret put LOG_SALT` で設定する
+LOG_SALT=local-dev-salt

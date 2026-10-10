@@ -1,0 +1,9 @@
+{
+  // ブラウザ向け。Workers の型（@cloudflare/workers-types）と DOM の型がぶつかるので分ける
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "types": []
+  },
+  "include": [".", "../src/content", "../src/lib/score.ts"]
+}

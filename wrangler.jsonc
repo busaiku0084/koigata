@@ -1,0 +1,23 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "koigata",
+  "main": "src/index.tsx",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "public",
+    "binding": "ASSETS"
+  },
+  // Cloudflare 側の生ログ（無料枠は 3 日保持）。長期の分析は D1 の access_logs を使う
+  "observability": {
+    "enabled": true
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "koigata",
+      // `wrangler d1 create koigata` で出た ID に置き換える
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "migrations"
+    }
+  ]
+}
