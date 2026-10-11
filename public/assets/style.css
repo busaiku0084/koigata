@@ -12,6 +12,19 @@
   box-sizing: border-box;
 }
 
+html {
+  /* 横向きにしたとき、iPhone が文字を勝手に大きくしないようにする */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+button,
+a {
+  /* ダブルタップでの拡大を止めて、タップへの反応を速くする */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
 body {
   margin: 0;
   background: var(--bg);
@@ -35,6 +48,14 @@ h1 {
   font-size: 1.8rem;
   line-height: 1.4;
   margin: 0.2em 0 0.4em;
+}
+
+/* 狭い画面で「ら？」だけが次の行に落ちないよう、文節で折り返す（Safari は balance だけ効く） */
+h1,
+.lead,
+.catch {
+  text-wrap: balance;
+  word-break: auto-phrase;
 }
 
 h2 {
@@ -143,9 +164,20 @@ h2 {
   cursor: pointer;
 }
 
-.choice:hover,
-.choice:focus-visible {
+/* スマホではタップ後も :hover が残り、次の質問の選択肢が選ばれて見えるので、マウスのときだけにする */
+@media (hover: hover) {
+  .choice:hover {
+    border-color: var(--accent);
+  }
+}
+
+.choice:focus-visible,
+.choice:active {
   border-color: var(--accent);
+}
+
+.choice:active {
+  background: #fff0f6;
 }
 
 .back {
@@ -220,6 +252,19 @@ h2 {
 
 .share-copy {
   background: var(--muted);
+}
+
+.share-buttons button:active,
+.button:active {
+  opacity: 0.8;
+}
+
+.story-preview {
+  display: block;
+  width: min(100%, 280px);
+  margin: 12px auto 0;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgb(0 0 0 / 12%);
 }
 
 .share-status,

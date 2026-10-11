@@ -134,7 +134,7 @@ export function ResultPage(props: { origin: string; type: LoveType; isOwnResult:
               X でポスト
             </button>
             <button type="button" class="share-ig" data-share="instagram">
-              インスタのストーリーズ
+              インスタに投稿
             </button>
             <button type="button" class="share-line" data-share="line">
               LINE で送る
