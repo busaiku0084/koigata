@@ -10,7 +10,7 @@
    - `docs/<内容>`: ドキュメントのみ
    - `chore/<内容>`: 設定・依存・雑務
 3. **実装する**。設計の判断を伴うなら ADR を書く（`docs/adr/`）
-4. **確認する**。`pnpm check`・`pnpm type-check`・`pnpm test` を通す。画面を変えたら `pnpm dev` で起動し、スマホ幅（400px 前後）でも見る。Claude Code では `quality-gate` スキルでまとめて確認できる
+4. **確認する**。`pnpm check`・`pnpm type-check`・`pnpm test` を通す。画面を変えたら `pnpm dev` で起動し、スマホ幅（320px と 375px）で見る。Claude Code では `quality-gate` スキルでまとめて確認できる
 5. **PR を出す**（後述のテンプレート）
 6. **CI が成功したことを確認してから**、スカッシュでマージする。マージ後はブランチを消す
 7. **デプロイする**（[operations.md](../operations.md)）。マイグレーションがあれば先に当てる

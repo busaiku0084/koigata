@@ -71,22 +71,43 @@ function mountQuiz(root: HTMLElement): void {
   render();
 }
 
-async function shareToInstagram(slug: string, status: HTMLElement): Promise<void> {
-  const imageUrl = `/story/${slug}.png`;
-  try {
-    const blob = await (await fetch(imageUrl)).blob();
-    const file = new File([blob], `koigata-${slug}.png`, { type: "image/png" });
-    // スマホでは共有シートから Instagram のストーリーズを選べる
-    if (navigator.canShare?.({ files: [file] })) {
+// iPhone の Safari は、タップから時間がたつと共有シートを開けない。
+// 画像は先に読み込んでおき、タップしたらすぐ navigator.share を呼ぶ
+function loadStoryFile(slug: string): Promise<File | null> {
+  return fetch(`/story/${slug}.png`)
+    .then((res) => res.blob())
+    .then((blob) => new File([blob], `koigata-${slug}.png`, { type: "image/png" }))
+    .catch(() => null);
+}
+
+// 共有シートが使えないとき（PC・アプリ内ブラウザなど）は、保存用に画像をページ内に出す
+function showStoryImage(slug: string, status: HTMLElement): void {
+  const img = el("img", { class: "story-preview" });
+  img.src = `/story/${slug}.png`;
+  img.alt = "ストーリーズ用の画像";
+  status.replaceChildren(
+    el("span", {
+      text: "画像を長押し（PC は右クリック）で保存して、ストーリーズに投稿してください。",
+    }),
+    img,
+  );
+}
+
+async function shareToInstagram(
+  slug: string,
+  file: File | null,
+  status: HTMLElement,
+): Promise<void> {
+  // スマホでは共有シートから Instagram のストーリーズを選べる
+  if (file && navigator.canShare?.({ files: [file] })) {
+    try {
       await navigator.share({ files: [file] });
       return;
+    } catch (err) {
+      if (err instanceof DOMException && err.name === "AbortError") return;
     }
-  } catch (err) {
-    if (err instanceof DOMException && err.name === "AbortError") return;
   }
-  window.open(imageUrl, "_blank", "noopener");
-  status.textContent =
-    "画像を長押し（PC は右クリック）で保存して、ストーリーズに投稿してください。";
+  showStoryImage(slug, status);
 }
 
 function mountShare(root: HTMLElement): void {
@@ -94,6 +115,10 @@ function mountShare(root: HTMLElement): void {
   const text = root.dataset.shareText ?? "";
   const slug = root.dataset.type ?? "";
   const status = root.querySelector<HTMLElement>(".share-status");
+  let storyFile: File | null = null;
+  loadStoryFile(slug).then((file) => {
+    storyFile = file;
+  });
 
   // 自分の結果を表示したあとは ?from=quiz を消し、再読み込みやコピーで混ざらないようにする
   history.replaceState(null, "", location.pathname);
@@ -116,10 +141,14 @@ function mountShare(root: HTMLElement): void {
       line.searchParams.set("url", sharedUrl);
       window.open(line, "_blank", "noopener");
     } else if (target === "instagram" && status) {
-      await shareToInstagram(slug, status);
+      await shareToInstagram(slug, storyFile, status);
     } else if (target === "copy" && status) {
-      await navigator.clipboard.writeText(`${text}\n${sharedUrl}`);
-      status.textContent = "コピーしました！";
+      try {
+        await navigator.clipboard.writeText(`${text}\n${sharedUrl}`);
+        status.textContent = "コピーしました！";
+      } catch {
+        status.textContent = sharedUrl;
+      }
     }
   });
 }

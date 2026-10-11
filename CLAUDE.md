@@ -85,7 +85,8 @@ pnpm deploy            # 本番へ（main にマージしたものだけ）
 - `any` は使わない。外部入力（`/api/e` の本文）は境界で型と長さを確かめ、イベント名は `EVENT_NAMES` の許可リストで絞る
 - 相対 import には `.ts` / `.tsx` を付ける（`node --test` で直接動かすため）
 - `client/` では `innerHTML` に文字列を入れない。DOM は `el()` で作る
-- 色は `public/assets/style.css` の変数を使う。幅 400px 前後で横スクロールを出さない
+- 遊ぶ人のほとんどはスマホ。幅 320px でも横スクロールを出さず、iPhone の Safari とアプリ内ブラウザで動くようにする（coding-guidelines.md の 4・5）
+- 色は `public/assets/style.css` の変数を使う
 - マイグレーションは `migrations/NNNN_name.sql` を足す。当て済みのファイルは書き換えない
 - TODO には issue 番号を付ける（`TODO(#4)`）
 
